@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Iframe Loader</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    iframe {
+      border: none;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // Function to parse query parameters
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Get the iframe URL from the 'ifr' query parameter
+    const iframeUrl = getQueryParam('ifr');
+
+    if (iframeUrl) {
+      // Create an iframe element dynamically
+      const iframe = document.createElement('iframe');
+      iframe.src = iframeUrl;
+
+      // Add the allowfullscreen attribute
+      iframe.setAttribute('allowfullscreen', 'true');
+
+      // Append the iframe to the body
+      document.body.appendChild(iframe);
+    } else {
+      // Display a message if the 'ifr' parameter is missing
+      document.body.innerHTML = '<p style="text-align:center; margin-top:20%; font-size:18px;">No iframe URL provided!</p>';
+    }
+  </script>
+</body>
+</html>
